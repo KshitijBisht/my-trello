@@ -42,6 +42,16 @@ export default (state = {},action) => {
                columns[columnIndex+direction].cards.push(card)
                return {...state,columns} 
           }
+          case actions.DELETE:{
+            const {columnIndex,cardIndex} = action
+            const columns = [...state.columns]
+            columns[columnIndex] = {
+              ...columns[columnIndex],
+              cards:[...columns[columnIndex].cards]
+            }
+             columns[columnIndex].cards.splice(cardIndex,1)
+            return {...state,columns} 
+       }
           
           case actions.ADD:{
           const {card, columnIndex} = action

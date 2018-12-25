@@ -7,7 +7,8 @@ export default ({
     columnIndex,
     onMoveLeft,
     onMoveRight,
-    onAddCard
+    onAddCard,
+    onDelete
 }) => (
     <div className="column">
     <h1> {column.name}</h1>
@@ -20,6 +21,7 @@ export default ({
          canMoveRight={columnIndex !==2}
          onMoveLeft={() =>onMoveLeft(cardIndex)}
          onMoveRight={() =>onMoveRight(cardIndex)}
+         onDelete={() => onDelete(cardIndex)}
         />
         
     ))}
