@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Column from "./Column"
 import {connect} from "react-redux";
-import {ADD,MOVE,LOAD, DELETE} from "./actions";
+import {ADD,MOVE,LOAD, DELETE, ADDCOLUMN} from "./actions";
 import './App.css';
 const DIRECTION_LEFT = -1;
 const DIRECTION_RIGHT = 1;
@@ -24,6 +24,13 @@ class App extends Component {
     this.props.delete(columIndex,cardIndex)
   }
 
+  handleAddColumn = () => {
+    const columnName = window.prompt("Enter column Name");
+    if(!columnName) return
+    this.props.addcolumn(columnName)
+  }
+  
+
   render() {
     if(!this.props.columns) return null
     return (
@@ -39,6 +46,7 @@ class App extends Component {
            onDelete={cardIndex => this.handleDelete(columnIndex,cardIndex)}           
            />
         ))}
+        <button className="column" onClick={this.handleAddColumn}>Add New Column</button>
       </div>
     );
   }
@@ -52,7 +60,8 @@ const mapDispatchToProps = (dispatch) => ({
   add: (columnIndex,card) => dispatch({type:ADD,columnIndex,card}),
   move: (columnIndex,cardIndex,direction) => dispatch({type:MOVE,columnIndex,cardIndex,direction}),
   load: () => dispatch({type:LOAD}),
-  delete: (columnIndex,cardIndex) => dispatch({type:DELETE,columnIndex,cardIndex})
+  delete: (columnIndex,cardIndex) => dispatch({type:DELETE,columnIndex,cardIndex}),
+  addcolumn:(columnName) => dispatch({type:ADDCOLUMN,columnName})
 })
 export default connect(mapStateToProps,mapDispatchToProps) (App);
 

@@ -58,16 +58,28 @@ export default (state = {},action) => {
           const columns = [...state.columns]
           columns[columnIndex]= {
             ...columns[columnIndex],
-            cards: [
+            cards: [  
                 ...columns[columnIndex].cards,
                 card
             ]
           }
           return {...state,columns}  
           }
+
+          case actions.ADDCOLUMN:{
+          const {columnName} = action
+          const newColumn = {name:columnName,cards:[]} 
+          const columns = [...state.columns,newColumn]
+          
+          console.log(columns)
+          return{columns}
+          
+        }
           default:
           
         }
+
+      
           
     
     return state
