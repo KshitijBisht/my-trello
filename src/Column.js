@@ -8,10 +8,12 @@ export default ({
     onMoveLeft,
     onMoveRight,
     onAddCard,
-    onDelete
+    onDelete,
+    onDeleteColumn
 }) => (
     <div className="column">
     <h1> {column.name}</h1>
+    <button onClick={onDeleteColumn}>X</button>
     {column.cards.map((card,cardIndex)=>(
         <Card
          key={cardIndex}
@@ -22,6 +24,7 @@ export default ({
          onMoveLeft={() =>onMoveLeft(cardIndex)}
          onMoveRight={() =>onMoveRight(cardIndex)}
          onDelete={() => onDelete(cardIndex)}
+         columnIndex={columnIndex}
         />
         
     ))}

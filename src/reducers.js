@@ -38,6 +38,7 @@ export default (state = {},action) => {
                  ...columns[columnIndex+direction],
                  cards:[...columns[columnIndex + direction].cards]
                }
+               
                const [card] = columns[columnIndex].cards.splice(cardIndex,1)
                columns[columnIndex+direction].cards.push(card)
                return {...state,columns} 
@@ -49,7 +50,9 @@ export default (state = {},action) => {
               ...columns[columnIndex],
               cards:[...columns[columnIndex].cards]
             }
+            
              columns[columnIndex].cards.splice(cardIndex,1)
+        
             return {...state,columns} 
        }
           
@@ -70,9 +73,15 @@ export default (state = {},action) => {
           const {columnName} = action
           const newColumn = {name:columnName,cards:[]} 
           const columns = [...state.columns,newColumn]
+          return{...state,columns}
           
-          console.log(columns)
-          return{columns}
+        }
+        case actions.DELETECOLUMN:{
+          const {columnIndex} = action
+          let columns = [...state.columns]      
+          columns.splice(columnIndex,1)
+          return{...state,columns}
+        
           
         }
           default:
