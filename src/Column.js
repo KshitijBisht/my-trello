@@ -10,9 +10,11 @@ export default ({
     onMoveRight,
     onAddCard,
     onDelete,
-    onLabelChange
+    onLabelChange,
+    onDeleteColumn
 }) => (
     <div className="column">
+    <button onClick={onDeleteColumn} className="delete-column">X</button>
     <EditableLabel
         className = "column-label" 
         initialValue={column.name}
