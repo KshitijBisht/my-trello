@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card";
-
+import './App.css';
+import EditableLabel from 'react-editable-label'
 
 export default ({
     column,
@@ -9,11 +10,15 @@ export default ({
     onMoveRight,
     onAddCard,
     onDelete,
-    onDeleteColumn
+    onLabelChange
 }) => (
     <div className="column">
-    <h1> {column.name}</h1>
-    <button onClick={onDeleteColumn}>X</button>
+    <EditableLabel
+        className = "column-label" 
+        initialValue={column.name}
+        save={value=>{onLabelChange(value)}}
+    />
+    
     {column.cards.map((card,cardIndex)=>(
         <Card
          key={cardIndex}
@@ -24,7 +29,6 @@ export default ({
          onMoveLeft={() =>onMoveLeft(cardIndex)}
          onMoveRight={() =>onMoveRight(cardIndex)}
          onDelete={() => onDelete(cardIndex)}
-         columnIndex={columnIndex}
         />
         
     ))}

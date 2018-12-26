@@ -84,6 +84,13 @@ export default (state = {},action) => {
         
           
         }
+
+        case actions.CHANGELABEL:{
+          const {columnIndex,value} = action
+          let columns = [...state.columns]
+          columns[columnIndex].name = value
+          return {...state,columns}
+        }
           default:
           
         }

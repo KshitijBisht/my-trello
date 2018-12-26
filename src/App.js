@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Column from "./Column"
 import {connect} from "react-redux";
-import {ADD,MOVE,LOAD, DELETE, ADDCOLUMN, DELETECOLUMN} from "./actions";
+import {ADD,MOVE,LOAD, DELETE, ADDCOLUMN, DELETECOLUMN, CHANGELABEL} from "./actions";
 import './App.css';
 const DIRECTION_LEFT = -1;
 const DIRECTION_RIGHT = 1;
@@ -50,7 +50,8 @@ class App extends Component {
            onMoveRight={cardIndex=> this.props.move(columnIndex,cardIndex,DIRECTION_RIGHT)}
            onAddCard={()=>this.handleAdd(columnIndex)}
            onDelete={cardIndex => this.handleDelete(columnIndex,cardIndex)}
-           onDeleteColumn={ () => this.handleDeleteColumn(columnIndex)}           
+           onDeleteColumn={ () => this.handleDeleteColumn(columnIndex)}
+           onLabelChange = {value => this.props.changelabel(columnIndex,value)}           
            />
         ))}
         <button className="column" onClick={this.handleAddColumn}>Add New Column</button>
@@ -69,7 +70,8 @@ const mapDispatchToProps = (dispatch) => ({
   load: () => dispatch({type:LOAD}),
   delete: (columnIndex,cardIndex) => dispatch({type:DELETE,columnIndex,cardIndex}),
   addcolumn:(columnName) => dispatch({type:ADDCOLUMN,columnName}),
-  deletecolumn:(columnIndex) => dispatch({type:DELETECOLUMN,columnIndex})
+  deletecolumn:(columnIndex) => dispatch({type:DELETECOLUMN,columnIndex}),
+  changelabel:(columnIndex,value) => dispatch({type:CHANGELABEL,columnIndex,value})
 })
 export default connect(mapStateToProps,mapDispatchToProps) (App);
 
